@@ -18,14 +18,12 @@
       // Verifica che la connessione sia attiva
       if (!$connessione) { die("Errore connessione");	}
       
-	  // Costruzione dell'istruzione SQL per l'inserimento dei dati del form
-      $istruzioneSQL = "UPDATE  eventi SET ";
-      $istruzioneSQL .= "titolo='".$_POST['titoloEvento']."'";
-	  $istruzioneSQL .= ",localita='".$_POST['loc']."'";
-      $istruzioneSQL .= ",descrizione='".$_POST['descrizione']."'";
-	  $istruzioneSQL .= ",lat='".$_POST['lat']."'";
-	  $istruzioneSQL .= ",lon='".$_POST['lon']."'";
-	  $istruzioneSQL .= " WHERE id=".$_POST['id'].";";
+	  
+$istruzioneSQL = mysqli_prepare($connessione,"UPDATE  eventi SET  (titolo,localita,descrizione,lat,lon )  WHERE id (?,?,?,?,?)");
+	
+	// Esecuzione della query
+	mysqli_stmt_bind_param($istruzioneSQL, "sssii", $titolo, $localita, $localita, $descrizione, $lat, $lon);
+	mysqli_stmt_execute($istruzioneSQL);
 
 	  
       mysqli_query($connessione,$istruzioneSQL);
