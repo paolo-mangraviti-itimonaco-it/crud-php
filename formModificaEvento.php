@@ -5,12 +5,14 @@
   </head>
   <body>
     <h1>Seleziona Modifica</h1>
-    <?php
+<?php
 		$serverName = "localhost";
 		$IPserver = "127.0.1";
 		$username = "applicazioneWeb";
 		$password = "123456_Web&&";
 		$db = "listaeventi";
+
+        $ID = $_GET['id'];
 
 		// Stabilisce la connessione al DBMS remoto
 		$connessione = mysqli_connect($serverName, $username, $password, $db);
@@ -18,9 +20,10 @@
 		// Check connection
 		if (!$connessione) { die("Errore connessione");	}
 
-		$istruzioneSQL = "SELECT * FROM eventi WHERE ";
-		$istruzioneSQL .= "id = ".$_GET['id'].";";
+		$istruzioneSQL = "SELECT * FROM eventi WHERE ?";
 		
+        mysqli_stmt_bind_param($istruzioneSQL, "i",$ID);
+
 		echo("<p>".$istruzioneSQL."</p>");
 		
 		$risultato = mysqli_query($connessione,$istruzioneSQL);
