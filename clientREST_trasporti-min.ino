@@ -1,19 +1,5 @@
 /*
-  Web client
-
-  This sketch connects to a website (http://www.google.com)
-  using the WiFi module.
-
-  This example is written for a network using WPA encryption. For
-  WEP or WPA, change the WiFi.begin() call accordingly.
-
-  This example is written for a network using WPA encryption. For
-  WEP or WPA, change the WiFi.begin() call accordingly.
-
-
-  created 13 July 2010
-  by dlf (Metodo2 srl)
-  modified 31 May 2012
+  Basato sullo sketch :
   by Tom Igoe
 
   Find the full UNO R4 WiFi Network documentation here:
@@ -23,10 +9,9 @@
 
 #include "WiFiS3.h"
 
-#define SECRET_SSID "girovago"
-#define SECRET_PASS "girovago"
+#define SECRET_SSID "---"
+#define SECRET_PASS "---"
 
-///////please enter your sensitive data in the Secret tab/arduino_secrets.h
 char ssid[] = SECRET_SSID;        // your network SSID (name)
 char pass[] = SECRET_PASS;    // your network password (use for WPA, or use as key for WEP)
 int keyIndex = 0;            // your network key index number (needed only for WEP)
@@ -69,7 +54,7 @@ void loop() {
       Serial.println("connected to server");
       // Make a HTTP request:
       client.println("GET /crud/ws-002.php?lat=8&lon=12&v=250&iddispositivo=650 HTTP/1.1");
-      client.println("Host: trasporto");
+      client.println("Host: SK Arduino uno R4");
       client.println("Connection: close\r\n");
       client.println();
       while (client.available()) {
